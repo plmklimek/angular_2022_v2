@@ -1,0 +1,12 @@
+<mat-card-title>Create Event</mat-card-title>
+<mat-card-content>
+    <form class="example-form" #loginForm="ngForm" (submit)="Create(loginForm)">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name" required name="name" ngModel>
+        </mat-form-field>
+        <div>
+            <button mat-raised-button color="primary">Create</button>
+        </div>
+    </form>
+</mat-card-content>

@@ -1,0 +1,24 @@
+<div>
+    <mat-card-title>User update</mat-card-title>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="reactiveform" (ngSubmit)="SaveUser(id)">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput placeholder="Username" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="password" formControlName="password">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="password" required name="rePassword" type="password">
+            </mat-form-field>
+            <div>
+                <button mat-raised-button color="primary">Update</button>
+            </div>
+        </form>
+    </mat-card-content>
+</div>

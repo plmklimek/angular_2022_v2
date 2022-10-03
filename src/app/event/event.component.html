@@ -1,0 +1,37 @@
+<div>
+    <div style="width: 800px">
+        <div style="font-size: 20px;">
+            <div>
+                Id: {{EventDetail.id}}
+            </div>
+            <div>
+                Name: {{EventDetail.name}}
+            </div>
+        </div>
+    </div>
+    <div style="margin:50px 0 0 0">
+        <h2>Invitations</h2>
+        <div *ngIf="EventDetail.invitations.length > 0">
+            <!-- <li *ngFor="let item of colors">{{item}}</li> -->
+            <div *ngFor="let item of EventDetail.invitations" style="margin:50px 0 0 0">
+                <div>Status: {{item.status}}</div>
+                <div>User: {{item.user.email}}</div>
+                <div *ngIf="item.user.email == user && item.status == 'PENDING'">
+                    <button mat-raised-button color="primary" (click)="Accept(item.id)">Accept</button>
+                    <button mat-raised-button color="primary" (click)="Reject(item.id)">Reject</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin:50px 0 0 0">
+        <h2>Add user</h2>
+        <div *ngIf="EventDetail.owner.email == user">
+            <select (change)="update($event)">
+                <option *ngFor="let user of users" [value]="user.id">
+                    {{user.email}}
+                </option>
+            </select>
+            <button mat-raised-button color="primary" (click)="SendInvitation()">Send</button>
+        </div>
+    </div>
+</div>

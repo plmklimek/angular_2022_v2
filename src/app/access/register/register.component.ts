@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     this.userService.Registration(this.reactiveform.value).subscribe(value => {
       this.respData = value;
       if (this.respData.id) {
-        alertify.success("Registered successfully please contact admin for activation");
+        alertify.success("Registered successfully");
         this.route.navigate(["login"]);
       }
     },

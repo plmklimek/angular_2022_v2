@@ -20,7 +20,6 @@ export class EventService {
   }
 
   Accept(invitationId: string) {
-    console.log('http://localhost:8080/invitations/' + invitationId + '?status=ACCEPTED')
     return this.http.post('http://localhost:8080/invitations/' + invitationId + '?status=ACCEPTED', {}, this.header);
   }
 
@@ -34,5 +33,9 @@ export class EventService {
 
   Create(name: string) {
     return this.http.post('http://localhost:8080/events', { name: name }, this.header);
+  }
+
+  getInvitationsByEventId(id: string) {
+    return this.http.get(`http://localhost:8080/event/${id}/invitations`, this.header);
   }
 }

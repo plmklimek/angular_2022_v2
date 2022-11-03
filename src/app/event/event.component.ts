@@ -20,8 +20,11 @@ export class EventComponent implements OnInit, OnDestroy {
   user: any;
   users: any;
   selectedUser: any;
+  EventInfo: any;
+  Invitations: any;
+  me: any;
 
-  constructor(private service: EventService, private activatedRoute: ActivatedRoute, private route: Router, private userService: UserMasterService) {
+  constructor(private service: EventService, private activatedRoute: ActivatedRoute, private route: Router, private userService: UserService, private userServiceMaster: UserMasterService) {
     this.user = localStorage.getItem("user");
   }
 
@@ -31,6 +34,8 @@ export class EventComponent implements OnInit, OnDestroy {
       this.id = +params['id']; // (+) converts string 'id' to a number
       this.getById(this.id.toString())
       this.GetAll()
+      this.GetMe();
+      this.GetInvitationsByEventId(this.id.toString());
       // In a real app: dispatch action to load the details here.
     });
   }
@@ -40,8 +45,8 @@ export class EventComponent implements OnInit, OnDestroy {
   }
   getById(id: string) {
     this.service.getById(id).subscribe(item => {
-      console.log(item)
-      this.EventDetail = item;
+      this.EventInfo = item;
+      console.log(this.EventInfo);
     })
   }
   Accept(invitationId: string) {
@@ -61,7 +66,7 @@ export class EventComponent implements OnInit, OnDestroy {
     })
   }
   GetAll() {
-    this.userService.GetAllUsers().subscribe(item => {
+    this.userServiceMaster.GetAllUsers().subscribe(item => {
       this.users = item;
     })
   }
@@ -69,10 +74,24 @@ export class EventComponent implements OnInit, OnDestroy {
     this.selectedUser = e.target.value
   }
   SendInvitation() {
-    this.service.SendInvitation(this.selectedUser, this.EventDetail.id).subscribe(item => {
+    this.service.SendInvitation(this.selectedUser, this.EventInfo.id).subscribe(item => {
       this.route.navigate(['event', this.id]).then(() => {
         window.location.reload();
       });
+    })
+  }
+
+  GetMe() {
+    this.userService.GetMe().subscribe((item: any) => {
+      this.me = item;
+      console.log(this.me);
+    })
+  }
+
+  GetInvitationsByEventId(id: string) {
+    this.service.getInvitationsByEventId(id).subscribe((item: any) => {
+      this.Invitations = item;
+      console.log(item);
     })
   }
 }

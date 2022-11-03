@@ -3,6 +3,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EventService } from '../event.service';
 import { EventModel } from '../Models/EventModel';
+import { UserService } from '../Service/user.service';
 
 @Component({
   selector: 'app-events',
@@ -13,13 +14,16 @@ export class EventsComponent implements OnInit {
 
   constructor(private service: EventService, private route: Router) { }
 
+  EventInfo: any;
   EventDetail: any;
+  Invitations: any;
   dataSource: any;
+  me: any;
 
   GetAllEvents() {
     this.service.getAll().subscribe(item => {
-      this.EventDetail = item;
-      this.dataSource = new MatTableDataSource<EventModel>(this.EventDetail);
+      this.EventInfo = item;
+      this.dataSource = new MatTableDataSource<EventModel>(this.EventInfo);
     })
   }
 

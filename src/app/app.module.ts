@@ -18,6 +18,7 @@ import { ModalpopupComponent } from './modalpopup/modalpopup.component';
 import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { CreateeventComponent } from './createevent/createevent.component';
+import { WebSocketService } from './web-socket-service.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { CreateeventComponent } from './createevent/createevent.component';
     MaterialModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -313,7 +313,11 @@
     <a *ngIf="!isLogged" routerLink="login">Login</a>
     <a *ngIf="!isLogged" routerLink="access/register">Register</a>
   </nav>
+  <div>
+  </div>
   <div class="content" role="main">
+    <button (click)="test()">Click</button>
+    Notifications : <span style="color: red;">{{ text }}</span>
     <router-outlet></router-outlet>
   </div>
 </div>
